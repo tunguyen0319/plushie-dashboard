@@ -1,32 +1,46 @@
 import React, {useState} from 'react';
-import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-import {auth} from '../../libs/firebase'
-import {Label, Input} from '../../ui/forms';
-import { SubmitButton } from '../../ui/buttons';
+import { BiMessageSquareError} from 'react-icons/bi';
+import { signInWithEmailAndPassword} from "firebase/auth"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const LoginPageStyles = styled.section`
-  margin: 4rem auto;
-  max-width: 75%;
-
-  header {
-      font-size: 1.5rem;
-      text-align: center;
-  }
-`;
-
-const FormControl = styled.div`
-  margin: 1rem 0;
-`;
+import { auth } from 'libs/firebase'
+import {Label, Input} from 'ui/forms';
+import { SubmitButton } from 'ui/buttons';
+import { LoginPageStyles, FormControl } from './styles';
 
 // STATE
 function LoginPage(props) {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    // start with state declaration
+    const navigator = useNavigate()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const notify = (error) => toast.error(error.code,{
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        icon: <BiMessageSquareError/>
+  
+    });
 
     function onLoginRequest(e){
         e.preventDefault();
-        console.log(password)
+        signInWithEmailAndPassword(auth, email, password)
+        .then(userCredential=>{
+            // move dashboard page
+            // useNavigate() react router
+            navigator('dashboard')
+        })
+        .catch(error=>{
+            notify(error)
+        })
     }
     
 
@@ -34,6 +48,7 @@ function LoginPage(props) {
         <>
 
             <LoginPageStyles>
+                <ToastContainer/>
                 <header>
                     <h1>Welcome Please Login</h1>
                 </header> 

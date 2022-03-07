@@ -1,40 +1,87 @@
-# React State
+ 
+ 
 
-## Pre Flight Check
-- Add the ui folder to your class react dashboard page.
-- Have your firebase config file ready and available.
+ 
+
+ 
+
+ 
+
+ # React Firebase Authentication
+ 
 
 
-## Class Project Setup
-- Drag and drop the ```ui folder``` into the class project src directory.
-- Drage and drop the ```libs folder``` into your class project src directory.
 
+## Pre Flight Check List
+Install [react-toastify](https://fkhadra.github.io/react-toastify/introduction) we will use this for error handeling in our form.
+```bash
+   npm i react-toastify
+```
+<br/>
+Check your package.json file and make sure that following packages are installed.
 
-## Local Firebase Config
-- First copy the ```setup.env```file into the root folder of your class project.
-- Rename the ```setup.env``` file to ```.env```
-- Get a copy of your firebase keys from the Firebase console.
-- Use the key values in the .env file you just renamed.
+```bash   
+   "firebase": "^9.6.7",
+   "react-router-dom": "^6.2.1",
+   "react-toastify": "^8.2.0",
+```
+<br/>
+Check your authentication service in the firebase dashboard. Make sure you have created the following user and have enabled the sign in with email and password message. 
 
-<img src="./config.jpg" width="360"> 
+```
+   user: jim@home.com
+   password: 123456
+```
+<br/>
+
+## Adding Toast Messages
+To add toast message you need to download and install react-toastify.
+```bash
+   npm install react-toastify
+```
+Next import the ToastContainer and the toast control component into the LoginPage.js
+```jsx
+import {ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+```
+Then define a notify function this function will be called from the login form Submit Event Handler. 
+
+```jsx
+  const notify = (error) => toast.error(error.code,{
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+  
+    });
+```
+
+Login form Event Handler function
+```jsx
+function onHandleSignIn (e){
+         e.preventDefault()
+         signInWithEmailAndPassword(auth, email,password)
+         .then(res=>{
+             notifySuccess("done")
+         })
+         .catch(error=>{
+             
+           notifyError(error)
+         })
+         
+
+    }
+```
+
 
 
  
 
-## Using Absolut Paths
-You can configure create react app to support importing your component modules using absolute paths.  
-  
-In the project root folder (where the package.json file is located) create a file called jsconfig.json.  
+ 
 
-Copy the code snippet below into the jsconfig.json file. If you have the Dev Server running you need to shut it down and restart to have the changes take effect.
+ 
 
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "src"
-  },
-  "include": ["src"]
-}
-```
  
