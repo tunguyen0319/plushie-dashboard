@@ -10,12 +10,12 @@ const LoginPageStyles = styled.section`
   }
 
   .Toastify__toast {
-    background-color: red;
+    background-color: tomato;
     color: #fff;
   }
 
   .Toastify__progress-bar--error {
-    background-color: blue;
+    background-color: #fff;
   }
 `;
 

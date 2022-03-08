@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IoEllipsisVerticalSharp, IoNotificationsOutline, IoMailOutline, IoPersonCircleOutline } from "react-icons/io5";
 
-import { IconButton } from '../../ui/buttons';
+import { IconButton } from 'ui/buttons';
 import { AppBarItem, AppBarItemGroup, AppBarItems, AppBarStyles } from './styles';
 
 function AppBar(props) {
