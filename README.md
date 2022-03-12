@@ -1,213 +1,93 @@
-# React Firebase Authentication
- 
+# Plushie React Dashboard 
 
-
-
-## Pre Flight Check List
-Check your authentication service in the firebase dashboard.  
-Make sure you have created a password based account.  
-Add or make sure the following user exists. 
-```bash
-   user: jim@home.com
-   password: 123456
-```
-<br/>
-
-
-
-## DashBoardPage.js Creating A Protected Route 
-To check to make sure that only a signed in user can access the dashboard we have to create a protected route. To do this we will have to create a few methods that will work together to check the current login status. If there is a firebase user then a successfull login will allow the user access to the dashboard to do this we will use the onAuthStateChange() method.  
-<br/>
-__Import the Required dependancies__  
-From the Firebase SDK import the onAuthStateChanged method. This method listens for changes in the authentication state, when a user signs in or logs out. We will use this to check if there is a firebase user trying to access the page.
+## Login Page
+### LoginPage.js
+This page has a 2 columns layout - Sign In Form & Display Hero Image.
 
 ```javascript
-import React, {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+    <PageCardStyles>
+        <ToastContainer/>
+        
+        {/* Sign In Form */}
+        <SignInForm>
+            <header>
+                <h1>Welcome to</h1>
+                <img src={Logo} alt='Plushie Logo'/>
+            </header> 
 
-import { onAuthStateChanged } from 'firebase/auth'
-import {auth} from 'libs/firebase'
- 
+            <form onSubmit={onLoginRequest}>
+                <FormControl>
+                    <Label htmlFor='email' display="">Email</Label>
+                    <LabelIcon><IoMail/></LabelIcon>
+                    <Input type="email" id="email" placeholder='janedoe@gmail.com' onChange={(e)=>setEmail(e.target.value)}/>
+                </FormControl>
 
-import {SideBar} from 'components/sidebar'
-import  {AppBar}  from 'components/appbar'
-import {DashBoardStyles} from './styles'
+                <FormControl>
+                    <Label htmlFor='password'>Password</Label>
+                    <LabelIcon><IoLockClosed/></LabelIcon>
+                    <Input type="password" id="password" placeholder='password' onChange={(e)=>setPassword(e.target.value)}/>
+                </FormControl>
 
-```  
-<br/>  
+                <SubmitButton type="submit" padding=".75rem 2.25rem" texttransform="lowercase" bgcolor="#FB7185" fs="1.125rem" width="fit-content">Sign In</SubmitButton>
+            </form>
+        </SignInForm>
 
-__Adding The AuthStateChange Observer__  
-Inside the DashBoardPage function start by creating a piece of state called ```isUser.```. The default state for a firebase user is false. Nobody should be allowed to access the page unless they are logged in. Next use the useNavigate method from the react router dom package. We will use this to return unauthorized users back to the login screen.  
-Create the ```onAuthStateChange()``` to check to see if there is a current logged in user. If there is then we can change the state to true.
- 
+        {/* Display Picture */}
+        <DisplayPic>
+            <img src={LoginHeroImg} alt='Mushroom Plusie Toy'/>
+        </DisplayPic>
 
-```javascript
-
-  function DashBoardPage  (props){
-    const [isUser, setIsUser]= useState(false)
-    const navigator = useNavigate();
-
-    onAuthStateChanged(auth, (user) => {
-   
-        if (user) {
-            setIsUser(true)
-     
-        } else {
-            // error shouldn't get access return to the login page
-            setIsUser(false)
-            navigator('/')
-        }
-      });
-```  
-<br/>
-
-__Conditional Rendering__  
-Because the onAuthStateChange method changes the value of the state variable isUser then we can use this to render the correct piece of UI state, which is the dashboard. The null is returned becaulse we do not want to see anything while onAuthStateChange is checking with firebase to see if there is a user. Thats it we now have a protected route.
-
-```javascript
-
-      if(isUser){
-        return( 
-            <>
-            <AppBar/>
-            <DashBoardStyles>
-               <SideBar/>
-                <Outlet/>
-            </DashBoardStyles>
-            </>
-        )
-      } 
-
-      return null
-  }
-  
-  export default DashBoardPage 
+    </PageCardStyles>
 ```
 
+## Dashboard
+### Dashboard.js
 
-## PageNotFound.js Checking For A Valid User
-In the 404 page not found we need to make a check on the Auth State. If there is a user then we should return them to the dashboard and if there is no user registered then they should go back to the login screen.
+This page is access from successful login. It contains 3 main components: Sidebar, Appbar and Panel that are divide into a 2-column-layout.
 
-<br/>
-
-__Import Dependancies__  
-Import the required functionality for the PageNotFound Component.
-
+1. Sidebar Items: Logo, Sub-page links and Logout link
+1. Appbar: display 2nd nav items & Panel: display page content
 
 ```javascript
- import React, {useState, useEffect} from 'react'
- 
- import {Link, useNavigate} from 'react-router-dom'
-import { onAuthStateChanged } from 'firebase/auth'
-import {auth} from 'libs/firebase'
 
-import { Button } from 'ui/buttons'
- import {NotFoundStyles} from './styles'
-
- ```
-<br/>
-
-__Add onAuthStateChange__  
-Inside the PageNotFound function you are going to perform the same check to find out if there is a user or not. If there is a valid user then we should create a link to the dashboard page and if there is no valid usre then we will create a link to the login page.  
-Instead of creating a conditional render we will check the value of the isUser state. Using a terniary operator we can render a link into depending on the value of state.   
-The last part is to create a sign out button inside the sidebar page.
-
-
- ```javascript
-
- function PageNotFound  (props){
-    const [isUser, setIsUser]= useState(false)
-    const navigator = useNavigate();
-  
-   
-        onAuthStateChanged(auth, (user) => {
-            console.log(user)
+    <DashBoardStyles>
+        <SideBar/>
         
-        
-            if (user) {
-                setIsUser(true)
+        <MainContent>
+            <AppBar/>  
+            <Panels/>
+        </MainContent>
             
-            } else {
-                // error shouldn't get access return to the login page
-                setIsUser(false)
-               
-            }
-          });
- 
+    </DashBoardStyles>
 
-      return (
-          <>
-          <NotFoundStyles>
-              <header>
-                    <h1> <span>404</span> Page Not Found</h1>
-              </header>
-              {
-                  isUser? <Link to="/dashboard">back to safty</Link>:<Link to="/">back to safty</Link>
-              }
-             
-          </NotFoundStyles>
-          </>
-      )
-
- }
- 
- export default PageNotFound 
 ```
 
-## SideBar.js Providing A Logout Button
-Open your SideBar.js file. Add the following dependancies.
 
-<br/>
-
-
+## 404 Page
+### PageNotFound.js
+This page applied layout from Login page with text info & Display Hero Image import from style of Login Page.
 
 ```javascript
- import React from 'react'
+    <PageCardStyles>
+        {/* 404 info */}
+        <PageNotFoundStyles>
+            <header>
+                <h1>404 error </h1>
+                <h2><span>Oops</span><br/>.<br/>.<br/>.</h2>
+            </header>
 
- import { signOut } from 'firebase/auth';
- import {auth} from 'libs/firebase';
- 
-  import {SideBarStyles} from './styles.js'
- import {Button} from 'ui/buttons'
- ```
-__Adding A Login Out Link  
-Add a button to the sidebar component and a click event handler to the button. In the example provided the ```onLogOutRequest``` handler has just a single line of code the signOut() method. This method will remove the use from the application and update the onAuthStateChange observer. Since the code is already added to the dashboar to listen for changes in authentication the isUser state will change in the DashboardPage and the user will be returned to the login page.
+            <p>It seems like what you are looking for is not existed. Let's get you back to a better spot.</p>
 
+            <SubmitButton padding=".75rem 2.25rem" texttransform="lowercase" bgcolor="#FB7185" color="#fff" fs="1.125rem" width="fit-content">
+            {
+                isUser? <Link to='/dashboard'>Back to Safety</Link> : <Link to='/'>Back to Safety</Link>
+            }
+            </SubmitButton>
+        </PageNotFoundStyles>
 
- ```javascript
-function SideBar  (props){
-     
-
-     function onLogOutRequest(e){
-           signOut(auth)
-      //   signOut(auth).then(() => {
-      //       // Sign-out successful.
-             
-      //     }).catch((error) => {
-      //       // An error happened.
-      //     });
-     }
-    
-     return( 
-         <SideBarStyles>
-
-             <header>
-               <h2>Dashboard</h2>
-             </header>
-          
-             <Button onClick={onLogOutRequest} padding="0.125rem 0.5rem" fs="12px" margin="4rem 0" width="max-content">log out</Button>
-
-            </SideBarStyles>
-     )
- }
- 
- export default SideBar 
- ```
- 
- 
-
- 
-
- 
-
- 
+        {/* display hero img */}
+        <DisplayPic>
+            <img src={PageNotFoundHeroImg} alt='Potato Plusie Toy'/>
+        </DisplayPic>
+    </PageCardStyles>
+```
