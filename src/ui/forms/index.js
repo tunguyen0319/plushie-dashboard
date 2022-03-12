@@ -2,23 +2,28 @@ import styled from 'styled-components';
 
 const Label = styled.label`
     width: ${props => props.width || "100%"};
-    font-size: 12px;
-    color: rgb(71 85 105);
+    font-family: 'Jost', sans-serif;
+    font-size: 18px;
+    color: #fff;
+    display: none;
 `;
 const Input = styled.input`
     width: ${props => props.width || "100%"};
     border:none;
-    border-radius: 2px;
-    box-shadow: 0 0 2px 1px rgba(0,0,0,0.19);
+    border-radius: 3px;
+    font-family: 'Jost', sans-serif;
     font-size:1.125rem;
-    padding: 0.35rem 0.5rem;
+    padding: 1.125rem 0.75rem;
 
     ::placeholder{
-        font-size: 14px;
-        color: rgb(71 85 105);
+        font-size: 1.125rem;
+        color: #B6B6B6;
+        font-style: italic;
+        font-weight: 300;
+        letter-spacing: 1px;
     }
     :focus{
-        background-color:  rgb(241 245 249);
+        // background-color:  rgb(241 245 249);
     }
 `;
 

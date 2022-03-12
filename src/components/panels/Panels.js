@@ -1,8 +1,18 @@
-import React, { forwardRef } from 'react';
+// import React, { forwardRef } from 'react';
+
+import { PanelStyles } from './styles'
 
 function Panels($prop) {
     return ( 
-        <div></div>
+        <>
+            <PanelStyles>
+                <header>
+                    <h1>Welcome Back!</h1>
+                </header>
+                
+            </PanelStyles>
+            
+        </>
      );
 }
 

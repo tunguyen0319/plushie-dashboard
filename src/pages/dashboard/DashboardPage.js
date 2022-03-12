@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppBar } from 'components/appbar';
 import { SideBar } from 'components/sidebar';
-import { DashBoardStyles } from './styles'
+import { DashBoardStyles, MainContent } from './styles'
+import { Panels } from 'components/panels';
 
 
 function DashBoardPage(props) {
@@ -28,10 +29,16 @@ function DashBoardPage(props) {
     if(isUser){
         return (
             <>
-                <AppBar/>
+                
                 <DashBoardStyles>
                     <SideBar/>
+                    <MainContent>
+                        <AppBar/>  
+                        <Panels/>
+                    </MainContent>
+                       
                 </DashBoardStyles>
+                
             </>
         )
     }

@@ -1,5 +1,5 @@
 {
-  "name": "react-starter-kit",
+  "name": "assessment-2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -38,5 +38,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "  "
+  },
+  "author": "Tu Nguyen",
+  "license": "ISC"
 }

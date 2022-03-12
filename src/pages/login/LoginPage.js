@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { BiMessageSquareError} from 'react-icons/bi';
+import { IoMail, IoLockClosed } from 'react-icons/io5';
 import { signInWithEmailAndPassword} from "firebase/auth"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,7 +10,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { auth } from 'libs/firebase'
 import {Label, Input} from 'ui/forms';
 import { SubmitButton } from 'ui/buttons';
-import { LoginPageStyles, FormControl } from './styles';
+import { PageCardStyles, SignInForm, LabelIcon, DisplayPic, FormControl } from './styles';
+import Logo from 'static/svg/branding/logowhite.svg';
+import LoginHeroImg from 'static/images/loginheroimg.jpg';
 
 // STATE
 function LoginPage(props) {
@@ -46,30 +49,39 @@ function LoginPage(props) {
 
     return ( 
         <>
-
-            <LoginPageStyles>
+            <PageCardStyles>
                 <ToastContainer/>
-                <header>
-                    <h1>Welcome Please Login</h1>
-                </header> 
+                
+                {/* Sign In Form */}
+                <SignInForm>
+                    <header>
+                        <h1>Welcome to</h1>
+                        <img src={Logo} alt='Plushie Logo'/>
+                    </header> 
 
-                <form onSubmit={onLoginRequest}>
-                    <FormControl>
-                        <Label htmlFor='email'>Email</Label>
-                        <Input type="email" id="email" placeholder='janedoe@gmail.com' onChange={(e)=>setEmail(e.target.value)}/>
-                    </FormControl>
+                    <form onSubmit={onLoginRequest}>
+                        <FormControl>
+                            <Label htmlFor='email' display="">Email</Label>
+                            <LabelIcon><IoMail/></LabelIcon>
+                            <Input type="email" id="email" placeholder='janedoe@gmail.com' onChange={(e)=>setEmail(e.target.value)}/>
+                        </FormControl>
 
-                    <FormControl>
-                        <Label htmlFor='password'>Password</Label>
-                        <Input type="password" id="password" placeholder='password'onChange={(e)=>setPassword(e.target.value)}/>
-                    </FormControl>
+                        <FormControl>
+                            <Label htmlFor='password'>Password</Label>
+                            <LabelIcon><IoLockClosed/></LabelIcon>
+                            <Input type="password" id="password" placeholder='password' onChange={(e)=>setPassword(e.target.value)}/>
+                        </FormControl>
 
-                    <FormControl>
-                        <SubmitButton type="submit" padding=".75rem" bgcolor="orange" margin="1rem 0 0" fs="1rem">Log In to Dashboard</SubmitButton>
-                    </FormControl>
-                </form>
+                        <SubmitButton type="submit" padding=".75rem 2.25rem" texttransform="lowercase" bgcolor="#FB7185" fs="1.125rem" width="fit-content">Sign In</SubmitButton>
+                    </form>
+                </SignInForm>
 
-            </LoginPageStyles>
+                {/* Display Picture */}
+                <DisplayPic>
+                    <img src={LoginHeroImg} alt='Mushroom Plusie Toy'/>
+                </DisplayPic>
+
+            </PageCardStyles>
         </>
 
      );
