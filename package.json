@@ -1,5 +1,5 @@
 {
-  "name": "assessment-2",
+  "name": "plushie-dashboard",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -39,13 +39,17 @@
       "last 1 safari version"
     ]
   },
-  "description": "",
+  "description": "assessment 2",
   "main": "index.js",
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "  "
+    "url": "git+https://github.com/tnguyen217/plushie-dashboard.git"
   },
   "author": "Tu Nguyen",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tnguyen217/plushie-dashboard/issues"
+  },
+  "homepage": "https://github.com/tnguyen217/plushie-dashboard#readme"
 }
