@@ -9,9 +9,10 @@ const EditorFeedbackStyles  = styled.aside`
 `;
 
 const FeedbackMessage  = styled.figcaption`
-      font-size: 1.75rem;
-      font-weight: 700;
-      color: #a3e635;
+      font-size: 3.5rem;
+      font-weight: 100;
+      color: #2c2c2c;
+      margin-top: 1rem;
 `;
 
 

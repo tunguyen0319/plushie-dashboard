@@ -7,7 +7,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import { AppBar } from 'components/appbar';
 import { SideBar } from 'components/sidebar';
 import { DashBoardStyles, MainContent } from './styles'
-import { Panels } from 'components/panels';
+// import { Panels } from 'components/panels';
 
 
 function DashBoardPage(props) {

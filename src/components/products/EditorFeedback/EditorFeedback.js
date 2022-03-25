@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AiOutlineCloudUpload, AiOutlineCheckCircle } from 'react-icons/ai'
+import { IoChatboxEllipsesSharp, IoCheckmarkDoneSharp } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'ui/buttons';
 import {EditorFeedbackStyles, FeedbackMessage, Feedback, FeedbackOption} from './styles'
@@ -12,31 +12,36 @@ function EditorFeedback ({children, status, writeCompleted, ...props})  {
           {
             !status
             ?
-            <Feedback>
-              <AiOutlineCheckCircle color='#d9f99d' size='12rem' />
-              <FeedbackMessage>Uploaded Successfully</FeedbackMessage>
-            </Feedback>
+            <section>
+              <Feedback>
+                <IoCheckmarkDoneSharp color='#fb7185' size='10rem' />
+                <FeedbackMessage>Completed</FeedbackMessage>
+              </Feedback>
+
+              <FeedbackOption>
+                <Button 
+                  bc="#2c2c2c" 
+                  color="white" 
+                  padding=".875rem 1.125rem"
+                  onClick={()=>{writeCompleted(false)}} 
+                  disabled={status} 
+                >Add Another Product</Button>
+                
+                <Button 
+                  bc="#fda4af" 
+                  color="white" 
+                  padding=".875rem 1.125rem"
+                  onClick={()=>{navigator('/dashboard')}} 
+                >View All Products</Button>
+              </FeedbackOption>
+
+            </section>
             : 
             <Feedback>
-              <AiOutlineCloudUpload color='#d9f99d' size='12rem' />
-              <FeedbackMessage>Uploading New Product</FeedbackMessage>
+              <IoChatboxEllipsesSharp color='#fda4af' size='10rem' />
+              <FeedbackMessage>Your new product is being uploading..</FeedbackMessage>
             </Feedback>
-          }
-
-          <FeedbackOption>
-            <Button 
-              bc="tomato" 
-              color="white" 
-              onClick={()=>{writeCompleted(false)}} 
-              disabled={status} 
-            >Add another product</Button>
-            
-            <Button 
-              bc="cornflowerblue" 
-              color="white" 
-              onClick={()=>{navigator('/dashboard')}} 
-            >View all products</Button>
-          </FeedbackOption>
+          }    
 
         </EditorFeedbackStyles>
   )
