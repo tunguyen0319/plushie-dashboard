@@ -7,6 +7,8 @@ import { auth } from 'libs/firebase';
 import Logo from 'static/svg/branding/logowhite.svg'
 import { SidebarStyles, SideBarItems, SideBarItem, SideBarLogOut } from './styles'
 
+import ProductOptions from './ProductOptions';
+
 
 function SideBar($prop) {
 
@@ -20,7 +22,9 @@ function SideBar($prop) {
                 <img src={Logo} alt='Plushie Logo'/>
             </header>
 
-            <SideBarItems>
+            <ProductOptions/>
+
+            {/* <SideBarItems>
                 <SideBarItem color="#2c2c2c">
                     <IoGridSharp/>
                     Dashboard
@@ -55,7 +59,7 @@ function SideBar($prop) {
                     <IoPeopleSharp/>
                     Members
                 </SideBarItem>
-            </SideBarItems>
+            </SideBarItems> */}
             
             <SideBarLogOut className="content" onClick={onLogOutRequest}>
                 <IoLogOutSharp/>

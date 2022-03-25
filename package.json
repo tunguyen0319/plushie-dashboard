@@ -9,6 +9,7 @@
     "firebase": "^9.6.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-dropzone": "^12.0.4",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
@@ -38,18 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "Assessment 2 React Dashboard",
-  "main": "index.js",
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tnguyen217/plushie-dashboard.git"
-  },
-  "author": "Tu Nguyen",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tnguyen217/plushie-dashboard/issues"
-  },
-  "homepage": "https://github.com/tnguyen217/plushie-dashboard#readme"
+  }
 }
