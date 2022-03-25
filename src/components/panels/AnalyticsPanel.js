@@ -2,7 +2,7 @@
 
 import { PanelStyles, PanelBody, PanelHeader } from './styles';
 
-function DashBoardPanel({title, ...$prop}) {
+function AnalyticsPanel({title, ...$prop}) {
     return ( 
         <>
             <PanelStyles>
@@ -18,4 +18,4 @@ function DashBoardPanel({title, ...$prop}) {
      );
 }
 
-export default DashBoardPanel;
+export default AnalyticsPanel;

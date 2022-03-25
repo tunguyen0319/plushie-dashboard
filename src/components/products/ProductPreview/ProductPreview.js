@@ -10,11 +10,13 @@ function ProductPreview ({children, productName, productPrice, productImage, pro
              <img src={productImage.previewImage} alt='8k nike flex' width='320' height='184'/>
            </ProductImage>
 
-           <ProductName>{productName}</ProductName>
-
-           <ProductPrice>${productPrice}</ProductPrice>
-
-           <ProductDescription>{productDescription}</ProductDescription>
+           <section>
+             <ProductName>{productName}</ProductName>
+             
+             <ProductPrice>${productPrice}</ProductPrice>
+             
+             <ProductDescription>{productDescription}</ProductDescription>
+           </section>
         </ProductPreviewStyles>
   )
 }

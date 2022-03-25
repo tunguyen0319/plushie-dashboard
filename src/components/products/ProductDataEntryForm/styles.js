@@ -3,39 +3,37 @@ import styled from 'styled-components';
 
 
 const ProductDataEntryFormStyles  = styled.form`
-    width: 380px;
+    width: 55%;
 
     input,
     textarea {
+        padding: .75rem;
+        border-radius: 5px;
+        border: 1px solid #c2c2c2; 
+
         &:focus {
-            border-color: cornflowerblue;
-            background-color: #eff6ff;
-            outline: cornflowerblue;
+            outline: none;
         }
     }
 
-    fieldset {
-        display: flex;
-        gap: 1rem;
-        margin-bottom 1.5rem;
+    div {
+        margin-bottom: 2rem;
     }
+
 `;
 
 const ProductImage = styled.div`
-    
+
 `;
 
 const ProductName = styled.div`
-    flex: 3.5;
 `;
 
 const ProductPrice = styled.div`
-    flex: 1.5;
 `;
 
 const ProductDescription = styled.div`
-    resize: none;
-    font-size: 14px;
+
 `;  
 
 

@@ -3,13 +3,10 @@ import styled from 'styled-components';
 
 
 const ProductEditorStyles  = styled.aside`
-    width: fit-content;
-    margin: 0 auto;
+    max-width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 5rem;
-
+    margin: 2rem 0 0;
 `;
 
 export {ProductEditorStyles}

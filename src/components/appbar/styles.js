@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const AppBarStyles = styled.nav`
   position: relative;
-  padding: 2rem;
+  padding: 2rem 2rem 0;
   background-color:${props => props.bgcolor || "transparent"};
 `;
 

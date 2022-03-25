@@ -6,7 +6,7 @@ const SidebarStyles = styled.div`
     position: relative;
 
     header {
-        margin-bottom: 3rem;
+        margin-bottom: 4rem;
     }
 
     img {
@@ -17,25 +17,35 @@ const SidebarStyles = styled.div`
 `
 
 const SideBarItems = styled.div`
-    padding: 0 2rem;
+    
 `;
 
 const SideBarItem = styled.div`
     display: flex;
     align-items: center;
-    padding: 1.125rem 0;
-    font-family: 'Jost', sans-serif;
-    font-size: 1.25rem;
+    padding: .75rem 2rem;
     color: ${props => props.color || "#fff"};
-
+    
     svg {
-        margin-right: .5rem;
+        margin-right: .75rem;
         font-size: 1.125rem;
+    }
+    
+    a {
+        font-family: 'Jost', sans-serif;
+        font-size: 1.25rem;
+        display: block;
+        color: ${props => props.color || "#fff"};
     }
 
     &:hover {
         color: #FDA4AF;
         cursor: pointer;
+
+        a {
+            text-decoration: none;
+            color: #FDA4AF;
+        }
     }
 `;
 

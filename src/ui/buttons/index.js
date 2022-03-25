@@ -5,7 +5,6 @@ const Button = styled.button`
     border: ${props => props.border || 'none'};;
     border-radius: ${props => props.radius || "3px"};;
     margin: ${props => props.margin || "0"};
-    // box-shadow: 0 0 3px 1px rgb(220, 220, 220);
     padding: ${props => props.padding || "0.25rem 1.5rem"};;
     color: ${props => props.color || "grey"};
     font-size: ${props => props.fs || "1rem"};;
@@ -14,14 +13,13 @@ const Button = styled.button`
 `;
 
 const SubmitButton = styled(Button)`
-    background-color: ${props => props.bgcolor || '#2563eb'};
+    background-color: ${props => props.bgcolor || '#fda4af'};
     color: ${props => props.color || '#f8fafc'}; 
     font-weight: ${props => props.fw || '700'}; 
     font-size: ${props => props.fs || '14px'};
     outline: ${props => props.outline || 'none'};
-    border: ${props => props.border || 'none'};;
     text-transform: ${props => props.texttransform || 'none'};;;
-    letter-spacing: 1.5px;
+    letter-spacing: .5px;
 `
 
 const IconButton = styled.button`
@@ -37,7 +35,3 @@ const IconButton = styled.button`
 
 
 export { Button, SubmitButton, IconButton }
-
-
- 
- 

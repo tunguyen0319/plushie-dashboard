@@ -7,7 +7,7 @@ import { EditorFeedback } from 'components/products/EditorFeedback';
 import ProductPreview from 'assets/images/login-heroimg.jpg';
 
 const defaults = {
-  description: "Ullamcorper a lacus vestibulum sed arcu non. Imperdiet dui accumsan sit amet nulla. Velit egestas dui id ornare arcu odio ut sem. Vestibulum sed arcu non odio euismod lacinia. At auctor urna nunc id cursus metus aliquam eleifend mi.",
+  description: "A slice of heaven. O for awesome, this chocka full cuzzie is as rip-off as a cracker. Meanwhile, at the black singlet woolshed party, not even au, sort your drinking out.",
   name: "Product Name",
   price: "0.00"
 }
