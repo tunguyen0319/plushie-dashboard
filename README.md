@@ -1,93 +1,111 @@
-# Plushie React Dashboard 
+# Plushie React Dashboard - Add New Product Panel
 
-## Login Page
-### LoginPage.js
-This page has a 2 columns layout - Sign In Form & Display Hero Image.
+This project contains Protected Routes, Nested Routes & Add New Product Panel.
+
+## Add Protected Routes with Nested Routes
+Protected Routes are added to require: 
+
+1. User login before accessing dashboard.
+1. Direct user from 404 to login page if user is not login
+1. Direct user from 404 to dashboard page if user is login
+
+Nested Routes are add to dashboard panel links with the landing page display All Products.
+
 
 ```javascript
-    <PageCardStyles>
-        <ToastContainer/>
-        
-        {/* Sign In Form */}
-        <SignInForm>
-            <header>
-                <h1>Welcome to</h1>
-                <img src={Logo} alt='Plushie Logo'/>
-            </header> 
-
-            <form onSubmit={onLoginRequest}>
-                <FormControl>
-                    <Label htmlFor='email' display="">Email</Label>
-                    <LabelIcon><IoMail/></LabelIcon>
-                    <Input type="email" id="email" placeholder='janedoe@gmail.com' onChange={(e)=>setEmail(e.target.value)}/>
-                </FormControl>
-
-                <FormControl>
-                    <Label htmlFor='password'>Password</Label>
-                    <LabelIcon><IoLockClosed/></LabelIcon>
-                    <Input type="password" id="password" placeholder='password' onChange={(e)=>setPassword(e.target.value)}/>
-                </FormControl>
-
-                <SubmitButton type="submit" padding=".75rem 2.25rem" texttransform="lowercase" bgcolor="#FB7185" fs="1.125rem" width="fit-content">Sign In</SubmitButton>
-            </form>
-        </SignInForm>
-
-        {/* Display Picture */}
-        <DisplayPic>
-            <img src={LoginHeroImg} alt='Mushroom Plusie Toy'/>
-        </DisplayPic>
-
-    </PageCardStyles>
+    <Routes>
+        <Route path="/" element={<LoginPage/>}/>
+        <Route path="dashboard" element={<DashBoardPage/>}>
+            <Route index element={<AllProductsPanel title="All Products"/>}/>
+            <Route path="add" element={<AddProductPanel title="Add New Product"/>}/>
+            <Route path="edit" element={<EditProductPanel title="Edit Product"/>}/>
+            <Route path="categories" element={<CategoriesPanel title="Categories"/>}/>
+            <Route path="orders" element={<OrdersPanel title="Orders"/>}/>
+            <Route path="discounts" element={<DiscountsPanel title="Discounts"/>}/>
+            <Route path="members" element={<MembersPanel title="Members"/>}/>
+            <Route path="analytics" element={<AnalyticsPanel title="Analytics"/>}/>
+        </Route>
+        <Route path="*" element={<PageNotFound/>}/>
+    </Routes>
 ```
 
-## Dashboard
-### Dashboard.js
+## Add New Product Panel
 
-This page is access from successful login. It contains 3 main components: Sidebar, Appbar and Panel that are divide into a 2-column-layout.
+1. Create Product Editor wrapped all content including Data Entry Form and Product Preview.
 
-1. Sidebar Items: Logo, Sub-page links and Logout link
-1. Appbar: display 2nd nav items & Panel: display page content
+1. Add form fields to gather product name, price, description and image.
 
-```javascript
+1. Show Editor Feedback showed product is loading and completed state.
 
-    <DashBoardStyles>
-        <SideBar/>
-        
-        <MainContent>
-            <AppBar/>  
-            <Panels/>
-        </MainContent>
-            
-    </DashBoardStyles>
+1. Product info and image are uploaded to firebase.
 
-```
-
-
-## 404 Page
-### PageNotFound.js
-This page applied layout from Login page with text info & Display Hero Image import from style of Login Page.
+## Create Widgets support passing input data and adding to Product Preview
 
 ```javascript
-    <PageCardStyles>
-        {/* 404 info */}
-        <PageNotFoundStyles>
-            <header>
-                <h1>404 error </h1>
-                <h2><span>Oops</span><br/>.<br/>.<br/>.</h2>
-            </header>
+const defaults = {
+  description: "A slice of heaven. O for awesome, this chocka full cuzzie is as rip-off as a cracker. Meanwhile, at the black singlet woolshed party, not even au, sort your drinking out.",
+  name: "Product Name",
+  price: "0.00"
+}
 
-            <p>It seems like what you are looking for is not existed. Let's get you back to a better spot.</p>
+function AddProduct ({children, ...props})  {
+  const [isWriting, setIsWriting] = useState(false)
+  const [productName, setProductName] = useState(defaults.name)
+  const [productPrice, setProductPrice] = useState(defaults.price)
+  const [productImage, setProductImage] = useState({previewImage:ProductPreview, file:null})
+  const [productDescription, setProductDescription] = useState(defaults.description)
+  const [loading, productLoader] = useAddNewProduct()
+  
+  const formatter = useNumberFormat()
 
-            <SubmitButton padding=".75rem 2.25rem" texttransform="lowercase" bgcolor="#FB7185" color="#fff" fs="1.125rem" width="fit-content">
-            {
-                isUser? <Link to='/dashboard'>Back to Safety</Link> : <Link to='/'>Back to Safety</Link>
-            }
-            </SubmitButton>
-        </PageNotFoundStyles>
+  function handleProductName(name){
+    setProductName(name)
+  }
 
-        {/* display hero img */}
-        <DisplayPic>
-            <img src={PageNotFoundHeroImg} alt='Potato Plusie Toy'/>
-        </DisplayPic>
-    </PageCardStyles>
+  function handleProductPrice(price){
+    setProductPrice(formatter(price))
+  }
+
+  function handleProductDescription(description){
+    setProductDescription(description)
+  }
+
+  function handleSubmit(e){
+    e.preventDefault()
+
+    const productData = {
+      productName,
+      productPrice,
+      productDescription
+    }
+
+    setIsWriting(true)
+    productLoader(productData, productImage.file)
+    setProductDescription(defaults.description)
+    setProductImage({previewImage:ProductPreview, file:null})
+    setProductName(defaults.name)
+    setProductPrice(defaults.price)
+
+  }
+
+  if(isWriting){
+    return(
+      <EditorFeedback status={loading} writeCompleted={setIsWriting} />
+    )
+  }
+  else{
+    return (
+      <AddProductStyles  {...props}>
+        <ProductEditor 
+        productName={productName} handleProductName={handleProductName}
+        productPrice={productPrice} handleProductPrice={handleProductPrice}
+        productImage={productImage} setProductImage={setProductImage}
+        productDescription={productDescription} handleProductDescription={handleProductDescription}
+        handleSubmit={handleSubmit}
+        />
+      </AddProductStyles>
+    )
+  }
+}
+
 ```
