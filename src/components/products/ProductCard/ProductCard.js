@@ -1,29 +1,34 @@
 import React from 'react';
 
-import { IconButton } from 'ui/buttons';
-import { ProductCardStyles, ProductImage, ProductName, ProductPrice, ProductDes } from './styles'
+import { IoColorWandOutline, IoTrashOutline } from 'react-icons/io5'
 
-function ProductCard ({children, id, name, price, des, url, ...props})  {
-  // console.log(name)
+import { AdminButton } from 'ui/buttons';
+import { ProductCardStyles, ProductImage, ProductName, ProductPrice, ProductDescription } from './styles'
 
+function ProductCard ({children, product, ...props})  {
+  const {productName, productPrice, productDescription, imageUrl} = {...product};
+  
   return (
       <ProductCardStyles>
+
         <ProductImage className='product-img'>
-          <img src={url} alt={name} />
+          <img src={imageUrl} alt={productName} />
         </ProductImage>
 
         <section>
-          <ProductName>{name}</ProductName>
+          <ProductName>{productName}</ProductName>
           
-          <ProductPrice>{price}</ProductPrice>
+          <ProductPrice>${productPrice}</ProductPrice>
           
-          <ProductDes>{des}</ProductDes>
+          <ProductDescription>{productDescription}</ProductDescription>
         </section>
+
+        <aside>
+          <AdminButton color="#FB7185" margin="0 0 0 auto"><IoColorWandOutline/></AdminButton>
+          <AdminButton color="#FB7185" margin="0 0 0 .5rem"><IoTrashOutline/></AdminButton>
+        </aside>
         
-        <div>
-          <IconButton>Edit</IconButton>
-          <IconButton>Delete</IconButton>
-        </div>
+
       </ProductCardStyles>
   )
 }

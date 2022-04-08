@@ -2,36 +2,23 @@ import { useState, useEffect } from 'react'
 import { ref as dataRef, get } from 'firebase/database'
 import { db } from 'libs/firebase'
 
-import { AllProduct } from 'components/products/widget/AllProduct'
+function useGetAllProducts(path){
 
-function useGetAllProducts(card, id, name, price, des, url){
-
-const [productData, setProductData] = useState([])
+    const [productData, setProductData] = useState(null)
 
     useEffect(()=>{
 
-        async function loadData(){
+        async function getProducts(){
             const productRef = dataRef(db, 'products/');
-            const res = await get(productRef)
-            const data = res.val();
-            setProductData(data)
+            const productSnapShot = await get(productRef)
+            const data = await productSnapShot.val();
+            setProductData(Object.values(data))
         }
-        loadData()
+        getProducts()
 
     },[])
 
-    card = Object.values(productData).map(product => {
-
-        id = product.uid
-        name = product.productName
-        price = product.productPrice
-        des = product.productDescription
-        url = product.imageUrl
-
-        return {id, name, price, des, url}
-    })
-
-    // console.log(card)
+    return productData
 
 }
 

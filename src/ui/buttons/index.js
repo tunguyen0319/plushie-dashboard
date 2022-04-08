@@ -9,6 +9,7 @@ const Button = styled.button`
     color: ${props => props.color || "grey"};
     font-size: ${props => props.fs || "1rem"};;
     width: ${props => props.width || "100%"};
+    display: ${props => props.display || 'block'};;;
 
 `;
 
@@ -33,5 +34,20 @@ const IconButton = styled.button`
     }
 `;
 
+const AdminButton = styled(Button)`
+    align-self: end;
+    padding: 0;
+    margin-left: 1.25rem;
+    cursor: pointer;
 
-export { Button, SubmitButton, IconButton }
+    svg {
+        font-size: 1.5rem;
+    }
+
+    &:hover {
+        color: #fda4af;
+    }
+`;
+
+
+export { Button, SubmitButton, IconButton, AdminButton }

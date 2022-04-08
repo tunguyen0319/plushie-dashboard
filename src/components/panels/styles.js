@@ -14,6 +14,11 @@ const PanelHeader = styled.header`
 `;
 
 const PanelBody = styled.div`
+  & > section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1.25rem;
+  }
   
 `;
 
