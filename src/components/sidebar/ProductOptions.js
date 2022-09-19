@@ -28,32 +28,38 @@ function ProductOptions($prop) {
 
             <SideBarItem>
                 <IoPencilSharp/>
-                <Link to="edit">Edit Product</Link>
+                <Link to="">Edit Product</Link>
+                {/* <Link to="edit">Edit Product</Link> */}
             </SideBarItem>
 
             <SideBarItem>
                 <IoFolderSharp/>
-                <Link to="categories">Categories</Link>
+                <Link to="">Categories</Link>
+                {/* <Link to="categories">Categories</Link> */}
             </SideBarItem>
 
             <SideBarItem>
                 <IoBagSharp/>
-                <Link to="orders">Orders</Link>
+                <Link to="">Orders</Link>
+                {/* <Link to="orders">Orders</Link> */}
             </SideBarItem>
 
             <SideBarItem>
                 <IoSparklesSharp/>
-                <Link to="discounts">Discounts</Link>
+                <Link to="">Discounts</Link>
+                {/* <Link to="discounts">Discounts</Link> */}
             </SideBarItem>
 
             <SideBarItem>
                 <IoStatsChart/>
-                <Link to="analytics">Analytics</Link>
+                <Link to="">Analytics</Link>
+                {/* <Link to="analytics">Analytics</Link> */}
             </SideBarItem>
 
             <SideBarItem>
                 <IoPeopleSharp/>
-                <Link to="members">Members</Link>
+                <Link to="">Members</Link>
+                {/* <Link to="members">Members</Link> */}
             </SideBarItem>
         </ProducOptionStyles>
      );
