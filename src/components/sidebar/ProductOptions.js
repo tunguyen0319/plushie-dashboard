@@ -9,7 +9,7 @@ import { SideBarItem } from "./styles";
 
 
 const ProducOptionStyles = styled.ul`
-    
+      
 `;
 
 function ProductOptions($prop) {
@@ -28,7 +28,7 @@ function ProductOptions($prop) {
 
             <SideBarItem>
                 <IoPencilSharp/>
-                <Link to="">Edit Product</Link>
+                <Link to="/">Edit Product</Link>
                 {/* <Link to="edit">Edit Product</Link> */}
             </SideBarItem>
 
