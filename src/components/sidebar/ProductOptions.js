@@ -28,7 +28,7 @@ function ProductOptions($prop) {
 
             <SideBarItem>
                 <IoPencilSharp/>
-                <Link to="">Edit Product</Link>
+                <Link to="edit">Edit Product</Link>
                 {/* <Link to="edit">Edit Product</Link> */}
             </SideBarItem>
 
